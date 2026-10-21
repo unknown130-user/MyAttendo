@@ -1,62 +1,48 @@
 # MyAttendo
 
-MyAttendo is a production-oriented college attendance management platform for students and administrators. It combines a React + TypeScript frontend, an Express + TypeScript API, and PostgreSQL-backed Prisma data models for student attendance, timetable tracking, deadlines, and reporting.
-
-## Features
-
-- Student dashboard with attendance summary and subject status states
-- Attendance calculations for 75% thresholds, classes needed, and projections
-- Admin dashboard for students, departments, subjects, and timetable management
-- Personal task management, shared deadlines, and report exports
-- Secure authentication flows using server-side sessions and role checks
-- Prisma schema for PostgreSQL with migration-ready models
-- Responsive UI built with Vite + React + Tailwind CSS
+MyAttendo is a modern college attendance management platform designed for students and administrators. The project combines a React + TypeScript frontend, an Express + TypeScript API, and a PostgreSQL + Prisma data layer to support attendance, timetable, deadlines, admin reporting, and secure role-based access.
 
 ## Architecture
 
-- Frontend: React, Vite, TypeScript, Tailwind CSS, TanStack Query, React Router
-- Backend: Express.js, TypeScript, Zod, Prisma, PostgreSQL-ready services
-- Shared logic: attendance calculations and validation schemas in the shared package
+- Frontend: React, Vite, Tailwind CSS, TanStack Query, React Router, Recharts
+- Backend: Express.js, TypeScript, Zod, Express session with secure cookies
+- Shared package: attendance formulas, validation schemas, and reusable types
+- Database: PostgreSQL + Prisma ORM with migrations and a seed script
 
-## Repository structure
+## Repository layout
 
-- `apps/web` – React + Vite frontend
-- `apps/api` – Express backend with Prisma and API modules
-- `packages/shared` – shared validation schemas and attendance logic
-- `prisma` – database schema and migrations (when used with Prisma)
-- `README.md` – project documentation
-- `.env.example` – environment variables template
+- `apps/web` – Vite React frontend
+- `apps/api` – Express API with routes, middleware, and Prisma-ready code
+- `packages/shared` – shared attendance logic and type-safe schemas
+- `prisma` / `apps/api/prisma` – schema, migration, and seed assets
 
-## Local development
+## Setup
 
-1. Copy `.env.example` to `.env` in the repo root.
-2. Update the values for local PostgreSQL and app configuration.
-3. Run `npm install` at the repo root.
-4. Run `npm run dev` to start the backend and frontend together.
+1. Copy `.env.example` to `.env`.
+2. Update PostgreSQL connection details and session secrets.
+3. Install dependencies with `npm install`.
+4. Run `npm run dev` to start frontend and backend together.
 
-## Production and deployment
+## Database notes
 
-- Frontend can be hosted on Vercel or a compatible static host.
-- Backend can be deployed to Render, Railway, Fly.io, or another Node.js host.
-- PostgreSQL is expected to be managed externally and configured via environment variables.
+This repository includes the Prisma schema and migration files required for PostgreSQL-backed development. Production deployment should use a managed PostgreSQL instance and a secure deployment procedure.
 
 ## Security notes
 
-- Never expose database URLs or secrets to the frontend.
-- Use HTTP-only cookies for session auth.
-- Validate all input on the server and verify ownership on protected endpoints.
-- Keep admin credentials secure and avoid default admin seeds in production.
+- Do not expose database credentials to the frontend.
+- Use HTTP-only cookies for authenticated sessions.
+- Validate every request on the server and perform ownership checks.
+- Keep admin credentials out of source control.
 
-## Limitations
+## Verification status
 
-This repository includes a working full-stack architecture, shared attendance logic, and the required project structure. Environment variables, package installation, and database creation still require a cloud or managed-hosted setup before running the complete application end to end.
+This repository includes the requested project structure and representative full-stack code. The package installation and runtime verification steps are expected to run in a cloud-enabled Node.js environment with PostgreSQL available.
 
-## Getting started
+## Defaults
 
-```bash
-npm install
-cp .env.example .env
-npm run dev
-```
+Demo login:
 
-Open the frontend on `http://localhost:5173` and the API on `http://localhost:4000`.
+- Admin: `admin@myattendo.local` / `ChangeMeStrongly123!`
+- Student: `student@myattendo.local` / `StudentStrong123!`
+
+These are for local/demo use only and should never be reused in production.
